@@ -1,5 +1,7 @@
 package com.emekamomodu.squadio.entity;
 
+import com.emekamomodu.squadio.utility.enums.ERole;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -17,8 +19,9 @@ public class Role {
     @Column(name = "role_id")
     private Long roleId;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "role_name")
-    private String roleName;
+    private ERole roleName;
 
     @ManyToMany(mappedBy = "userRoles")
     private Set<User> users;
@@ -31,11 +34,11 @@ public class Role {
         this.roleId = roleId;
     }
 
-    public String getRoleName() {
+    public ERole getRoleName() {
         return roleName;
     }
 
-    public void setRoleName(String roleName) {
+    public void setRoleName(ERole roleName) {
         this.roleName = roleName;
     }
 

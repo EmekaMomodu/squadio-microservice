@@ -2,6 +2,7 @@ package com.emekamomodu.squadio.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -12,7 +13,10 @@ import java.util.Set;
  * @date 12/30/21 1:31 PM
  */
 @Entity
-@Table(name = "user")
+@Table(name = "user",
+        uniqueConstraints = {
+        @UniqueConstraint(columnNames = "username")
+})
 public class User {
 
     @Id
@@ -28,6 +32,7 @@ public class User {
     private String password;
 
     @Column(name = "login_flag")
+    @ColumnDefault("'N'")
     private String loginFlag;
 
     @ManyToMany

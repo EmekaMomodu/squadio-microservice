@@ -1,6 +1,6 @@
 package com.emekamomodu.squadio.entity;
 
-import com.emekamomodu.squadio.utility.enums.ERole;
+import com.emekamomodu.squadio.model.ERole;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -25,6 +25,19 @@ public class Role {
 
     @ManyToMany(mappedBy = "userRoles")
     private Set<User> users;
+
+    public Role() {
+    }
+
+    public Role(ERole roleName) {
+        this.roleName = roleName;
+    }
+
+    public Role(Role role) {
+        this.roleId = role.getRoleId();
+        this.roleName = role.getRoleName();
+        this.users = role.getUsers();
+    }
 
     public Long getRoleId() {
         return roleId;

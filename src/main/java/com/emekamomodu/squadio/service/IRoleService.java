@@ -1,7 +1,7 @@
 package com.emekamomodu.squadio.service;
 
-import com.emekamomodu.squadio.dto.RoleDto;
-import com.emekamomodu.squadio.utility.enums.ERole;
+import com.emekamomodu.squadio.entity.Role;
+import com.emekamomodu.squadio.model.ERole;
 
 import java.util.List;
 
@@ -14,38 +14,38 @@ public interface IRoleService {
 
     /**
      * Create and persist new Role object
-     * @param roleDto role object creation request object. Contains name
-     * @return RoleDto roleDto object stored in data store
+     * @param role role object creation request object. Contains name
+     * @return Role role object stored in data store
      */
-    RoleDto create(RoleDto roleDto);
+    Role create(Role role);
 
     /**
      * Update role object name
-     * @param roleDto role object update request object. Contains name
+     * @param role role object update request object. Contains name
      * @param id role object identifier
-     * @return RoleDto roleDto object stored in data store
+     * @return Role role object stored in data store
      */
-    RoleDto update(RoleDto roleDto, Long id);
+    Role update(Role role, Long id);
 
     /**
      * Fetch all existing role objects
-     * @return List<RoleDto> list of role objects
+     * @return List<Role> list of role objects
      */
-    List<RoleDto> getAll();
+    List<Role> getAll();
 
     /**
      * Fetch role object by identifier
      * @param id role object identifier
-     * @return RoleDto roleDto object stored in data store
+     * @return Role role object stored in data store
      */
-    RoleDto getByID(Long id);
+    Role getByID(Long id);
 
     /**
      * Fetch role object by name
      * @param roleName role object name
-     * @return RoleDto roleDto object stored in data store
+     * @return Role role object stored in data store
      */
-    RoleDto getByRoleName(ERole roleName);
+    Role getByRoleName(ERole roleName);
 
     /**
      * Delete role object from data store

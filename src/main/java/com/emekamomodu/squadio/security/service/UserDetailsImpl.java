@@ -27,14 +27,17 @@ public class UserDetailsImpl implements UserDetails {
     @JsonIgnore
     private final String password;
 
+    private String loginFlag;
+
     private final Collection<? extends GrantedAuthority> authorities;
 
     public UserDetailsImpl(Long id, String username, String password,
-                           Collection<? extends GrantedAuthority> authorities) {
+                           Collection<? extends GrantedAuthority> authorities, String loginFlag) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.authorities = authorities;
+        this.loginFlag = loginFlag;
     }
 
     public static UserDetailsImpl build(User user) {
@@ -46,7 +49,8 @@ public class UserDetailsImpl implements UserDetails {
                 user.getUserId(),
                 user.getUsername(),
                 user.getPassword(),
-                authorities);
+                authorities,
+                user.getLoginFlag());
     }
 
     @Override
@@ -86,6 +90,14 @@ public class UserDetailsImpl implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public String getLoginFlag() {
+        return loginFlag;
+    }
+
+    public void setLoginFlag(String loginFlag) {
+        this.loginFlag = loginFlag;
     }
 
     @Override

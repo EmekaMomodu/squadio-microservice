@@ -1,4 +1,4 @@
-package com.emekamomodu.squadio.utility.enums;
+package com.emekamomodu.squadio.model;
 
 /**
  * @author CMOMODU

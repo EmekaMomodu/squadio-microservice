@@ -1,18 +1,14 @@
-package com.emekamomodu.squadio.payload.request;
-
-import javax.validation.constraints.NotBlank;
+package com.emekamomodu.squadio.model.request;
 
 /**
  * @author CMOMODU
  * @version 1.0
  * @date 12/31/21 12:29 PM
  */
-public class LoginRequest {
+public class AuthRequest {
 
-    @NotBlank
     private String username;
 
-    @NotBlank
     private String password;
 
     public String getUsername() {
@@ -33,7 +29,7 @@ public class LoginRequest {
 
     @Override
     public String toString() {
-        return "LoginRequest{" +
+        return "AuthRequest{" +
                 "username='" + username + '\'' +
                 '}';
     }

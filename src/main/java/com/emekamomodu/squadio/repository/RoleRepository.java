@@ -1,11 +1,10 @@
 package com.emekamomodu.squadio.repository;
 
 import com.emekamomodu.squadio.entity.Role;
-import com.emekamomodu.squadio.utility.enums.ERole;
+import com.emekamomodu.squadio.model.ERole;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
 import java.util.Optional;
 
 /**

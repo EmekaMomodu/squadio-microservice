@@ -33,7 +33,7 @@ public class User {
 
     @Column(name = "login_flag")
     @ColumnDefault("'N'")
-    private String loginFlag;
+    private String loginFlag = "N";
 
     @ManyToMany
     @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "user_id"),
@@ -42,6 +42,20 @@ public class User {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Account> accounts;
+
+    public User() {
+    }
+
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
+    public User(String username, String password, Set<Role> userRoles) {
+        this.username = username;
+        this.password = password;
+        this.userRoles = userRoles;
+    }
 
     public Long getUserId() {
         return userId;
@@ -89,17 +103,5 @@ public class User {
 
     public void setAccounts(Set<Account> accounts) {
         this.accounts = accounts;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "userId=" + userId +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", loginFlag='" + loginFlag + '\'' +
-                ", userRoles=" + userRoles +
-                ", accounts=" + accounts +
-                '}';
     }
 }

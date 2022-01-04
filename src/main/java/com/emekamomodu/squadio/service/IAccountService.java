@@ -21,6 +21,7 @@ public interface IAccountService {
 
     /**
      * Get all accounts for a user
+     *
      * @return Response response object
      */
     Response getAllUserAccounts(String userId) throws ObjectNotFoundException;

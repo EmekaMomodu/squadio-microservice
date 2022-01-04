@@ -15,6 +15,7 @@ public interface IAuthService {
 
     /**
      * log user in by authenticating user credentials
+     *
      * @param authRequest request object with user credential
      * @return Response response object
      */
@@ -22,6 +23,7 @@ public interface IAuthService {
 
     /**
      * log user out
+     *
      * @return Response response object
      */
     Response logout();

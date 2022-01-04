@@ -1,13 +1,12 @@
 package com.emekamomodu.squadio.controller;
 
+import com.emekamomodu.squadio.model.request.AccountStatementRequest;
 import com.emekamomodu.squadio.model.response.Response;
 import com.emekamomodu.squadio.service.IAccountService;
+import com.emekamomodu.squadio.service.IAccountStatementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author CMOMODU
@@ -21,9 +20,17 @@ public class AccountController {
     @Autowired
     private IAccountService accountService;
 
-    @GetMapping(value="/{user-id}")
+    @Autowired
+    private IAccountStatementService accountStatementService;
+
+    @GetMapping(value = "/{user-id}")
     public ResponseEntity<Response> getAllUserAccounts(@PathVariable(name = "user-id") String userId) {
         return ResponseEntity.ok(accountService.getAllUserAccounts(userId));
+    }
+
+    @PostMapping(value = "/statements")
+    public ResponseEntity<Response> getAllAccountStatements(@RequestBody AccountStatementRequest accountStatementRequest) {
+        return ResponseEntity.ok(accountStatementService.getAllAccountStatements(accountStatementRequest));
     }
 
 }

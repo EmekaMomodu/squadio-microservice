@@ -22,8 +22,7 @@ public class Utility {
     public static String generateRandomAccount(String prefix) {
         Random rand = new Random();
         StringBuilder stringBuilder = new StringBuilder(prefix);
-        for (int i = 0; i < 10; i++)
-        {
+        for (int i = 0; i < 10; i++) {
             int n = rand.nextInt(10);
             stringBuilder.append(n);
         }

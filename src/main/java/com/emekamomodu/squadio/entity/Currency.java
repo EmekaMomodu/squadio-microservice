@@ -17,10 +17,10 @@ public class Currency {
     @Column(name = "currency_id")
     private Long currencyId;
 
-    @Column(name = "currency_code", unique=true)
+    @Column(name = "currency_code", unique = true)
     private String currencyCode;
 
-    @Column(name = "currency_name", unique=true)
+    @Column(name = "currency_name", unique = true)
     private String currencyName;
 
     @OneToMany(mappedBy = "currency", cascade = CascadeType.ALL, orphanRemoval = true)

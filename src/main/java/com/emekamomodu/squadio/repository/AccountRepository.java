@@ -1,7 +1,6 @@
 package com.emekamomodu.squadio.repository;
 
 import com.emekamomodu.squadio.entity.Account;
-import com.emekamomodu.squadio.entity.TokenBlacklist;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

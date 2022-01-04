@@ -67,7 +67,7 @@ public class AccountService implements IAccountService {
         Long id = Long.valueOf(userId);
 
         // revoke access if not admin and owner of id
-        if(isNotAdmin && !Objects.equals(loggedInUserId, id)){
+        if (isNotAdmin && !Objects.equals(loggedInUserId, id)) {
             throw new AccessDeniedException("Not allowed to access another user's account");
         }
 
@@ -83,7 +83,7 @@ public class AccountService implements IAccountService {
             accountModels.add(accountModel);
         }
 
-        if (accountModels.size() > 0){
+        if (accountModels.size() > 0) {
             logger.info("Accounts fetched successfully : {}", accountModels);
             return new Response(true, "All Accounts fetched Successfully", accountModels);
         }

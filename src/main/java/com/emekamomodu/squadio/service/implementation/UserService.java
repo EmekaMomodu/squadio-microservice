@@ -109,7 +109,7 @@ public class UserService implements IUserService {
             userModels.add(userModel);
         }
 
-        if (userModels.size() > 0){
+        if (userModels.size() > 0) {
             logger.info("Users fetched successfully : {}", userModels);
             return new Response(true, "All Users fetched Successfully", userModels);
         }
@@ -134,7 +134,7 @@ public class UserService implements IUserService {
         String loggedInUsername = userDetails.getUsername();
 
         // revoke access if not admin and owner of username
-        if(isNotAdmin && !loggedInUsername.equalsIgnoreCase(username)){
+        if (isNotAdmin && !loggedInUsername.equalsIgnoreCase(username)) {
             throw new AccessDeniedException("Not allowed to access another user's information");
         }
 

@@ -17,6 +17,7 @@ public interface IUserService {
 
     /**
      * Create and persist new User object
+     *
      * @param createUserRequest User object creation request object. Contains createUserRequest details
      * @return User object
      */
@@ -24,12 +25,14 @@ public interface IUserService {
 
     /**
      * Get all users
+     *
      * @return Response response object
      */
     Response getAllUsers() throws ObjectNotFoundException;
 
     /**
      * Get specified user information
+     *
      * @return Response response object
      */
     Response getUserInformation(String username) throws ObjectNotFoundException, AccessDeniedException;

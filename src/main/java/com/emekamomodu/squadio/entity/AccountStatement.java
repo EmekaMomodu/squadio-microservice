@@ -1,6 +1,7 @@
 package com.emekamomodu.squadio.entity;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -20,8 +21,8 @@ public class AccountStatement {
     @Column(name = "description")
     private String description;
 
-    @Column(name = "amount")
-    private String amount;
+    @Column(name = "amount", scale = 2)
+    private BigDecimal amount;
 
     @Column(name = "date")
     private Date date;
@@ -29,6 +30,16 @@ public class AccountStatement {
     @ManyToOne
     @JoinColumn(name = "account_id")
     private Account account;
+
+    public AccountStatement() {
+    }
+
+    public AccountStatement(String description, BigDecimal amount, Date date, Account account) {
+        this.description = description;
+        this.amount = amount;
+        this.date = date;
+        this.account = account;
+    }
 
     public Long getAccountStatementId() {
         return accountStatementId;
@@ -46,11 +57,11 @@ public class AccountStatement {
         this.description = description;
     }
 
-    public String getAmount() {
+    public BigDecimal getAmount() {
         return amount;
     }
 
-    public void setAmount(String amount) {
+    public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
 

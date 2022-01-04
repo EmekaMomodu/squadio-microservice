@@ -1,6 +1,7 @@
 package com.emekamomodu.squadio.entity;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.Set;
 
 /**
@@ -17,14 +18,14 @@ public class Account {
     @Column(name = "account_id")
     private Long accountId;
 
-    @Column(name = "account_number", unique=true)
+    @Column(name = "account_number", unique = true)
     private String accountNumber;
 
-    @Column(name = "iban", unique=true)
+    @Column(name = "iban", unique = true)
     private String iban;
 
-    @Column(name = "balance")
-    private String balance;
+    @Column(name = "balance", scale = 2)
+    private BigDecimal balance;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -44,7 +45,11 @@ public class Account {
     public Account() {
     }
 
-    public Account(String accountNumber, String iban, String balance, User user,
+    public Account(Long accountId) {
+        this.accountId = accountId;
+    }
+
+    public Account(String accountNumber, String iban, BigDecimal balance, User user,
                    AccountType accountType, Currency currency) {
         this.accountNumber = accountNumber;
         this.iban = iban;
@@ -78,11 +83,11 @@ public class Account {
         this.iban = iban;
     }
 
-    public String getBalance() {
+    public BigDecimal getBalance() {
         return balance;
     }
 
-    public void setBalance(String balance) {
+    public void setBalance(BigDecimal balance) {
         this.balance = balance;
     }
 

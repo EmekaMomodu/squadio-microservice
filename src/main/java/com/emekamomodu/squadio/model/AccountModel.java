@@ -1,10 +1,6 @@
 package com.emekamomodu.squadio.model;
 
-import com.emekamomodu.squadio.entity.AccountType;
-import com.emekamomodu.squadio.entity.Currency;
-import com.emekamomodu.squadio.entity.User;
-
-import javax.persistence.*;
+import java.math.BigDecimal;
 
 /**
  * @author CMOMODU
@@ -21,14 +17,14 @@ public class AccountModel {
 
     private String IBAN;
 
-    private String balance;
+    private BigDecimal balance;
 
     private String currency;
 
     public AccountModel() {
     }
 
-    public AccountModel(Long id, String accountType, String accountNumber, String IBAN, String balance, String currency) {
+    public AccountModel(Long id, String accountType, String accountNumber, String IBAN, BigDecimal balance, String currency) {
         Id = id;
         this.accountType = accountType;
         this.accountNumber = accountNumber;
@@ -69,11 +65,11 @@ public class AccountModel {
         this.IBAN = IBAN;
     }
 
-    public String getBalance() {
+    public BigDecimal getBalance() {
         return balance;
     }
 
-    public void setBalance(String balance) {
+    public void setBalance(BigDecimal balance) {
         this.balance = balance;
     }
 

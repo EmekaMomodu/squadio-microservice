@@ -32,7 +32,7 @@ public class ControllerErrorHandler {
 
     @ExceptionHandler(value = HttpMessageNotReadableException.class)
     protected ResponseEntity<Response> handleHttpMessageNotReadableException(HttpMessageNotReadableException httpMessageNotReadableException,
-                                                       HttpServletResponse response) {
+                                                                             HttpServletResponse response) {
         logger.error(httpMessageNotReadableException.toString());
         return buildResponse(HttpStatus.UNPROCESSABLE_ENTITY, httpMessageNotReadableException.getMessage());
     }
@@ -57,7 +57,7 @@ public class ControllerErrorHandler {
 
     @ExceptionHandler(value = HttpRequestMethodNotSupportedException.class)
     protected ResponseEntity<Response> handleHttpRequestMethodNotSupportedException(HttpRequestMethodNotSupportedException httpRequestMethodNotSupportedException,
-                                                       HttpServletRequest request) {
+                                                                                    HttpServletRequest request) {
         logger.error(httpRequestMethodNotSupportedException.toString());
         return buildResponse(HttpStatus.METHOD_NOT_ALLOWED, httpRequestMethodNotSupportedException.getMessage());
     }

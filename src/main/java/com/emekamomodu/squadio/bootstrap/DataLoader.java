@@ -11,8 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Locale;
 
 import static com.emekamomodu.squadio.utility.Utility.generateRandomAccount;
 
@@ -37,6 +40,9 @@ public class DataLoader implements CommandLineRunner {
     @Autowired
     private IAccountService accountService;
 
+    @Autowired
+    private IAccountStatementService accountStatementService;
+
     @Override
     public void run(String... args) throws Exception {
 
@@ -50,12 +56,12 @@ public class DataLoader implements CommandLineRunner {
         User userAdmin = userService.create(new CreateUserRequest("Admin", "admin", new HashSet<>(Collections.singletonList("ADMIN"))));
         User userMohamed = userService.create(new CreateUserRequest("Mohamed", "user", new HashSet<>(Collections.singletonList("USER"))));
         User userJohn = userService.create(new CreateUserRequest("John", "user", new HashSet<>(Collections.singletonList("USER"))));
-        User userKumar = userService.create( new CreateUserRequest("Kumar", "user", new HashSet<>(Collections.singletonList("USER"))));
+        User userKumar = userService.create(new CreateUserRequest("Kumar", "user", new HashSet<>(Collections.singletonList("USER"))));
 
         // Create Account Types
-        AccountType savingsAccountType =  accountTypeService.create(new AccountType(EAccountType.SAVINGS));
+        AccountType savingsAccountType = accountTypeService.create(new AccountType(EAccountType.SAVINGS));
         AccountType currentAccountType = accountTypeService.create(new AccountType(EAccountType.CURRENT));
-        AccountType fixedDepositAccountType =  accountTypeService.create(new AccountType(EAccountType.FIXED_DEPOSIT));
+        AccountType fixedDepositAccountType = accountTypeService.create(new AccountType(EAccountType.FIXED_DEPOSIT));
 
         // Create Currencies
         Currency usdCurrency = currencyService.create(new Currency("USD", "United State Dollars"));
@@ -67,19 +73,19 @@ public class DataLoader implements CommandLineRunner {
         // accountMohamed
         Account accountMohamed1 = accountService.create(new Account(generateRandomAccount(""),
                 generateRandomAccount("US"),
-                "538356.58",
+                new BigDecimal("538356.58"),
                 userMohamed,
                 savingsAccountType,
                 usdCurrency));
         Account accountMohamed2 = accountService.create(new Account(generateRandomAccount(""),
                 generateRandomAccount("AE"),
-                "8367836.37",
+                new BigDecimal("8367836.37"),
                 userMohamed,
                 fixedDepositAccountType,
                 aedCurrency));
         Account accountMohamed3 = accountService.create(new Account(generateRandomAccount(""),
                 generateRandomAccount("EG"),
-                "122577.91",
+                new BigDecimal("122577.91"),
                 userMohamed,
                 currentAccountType,
                 egpCurrency));
@@ -87,19 +93,19 @@ public class DataLoader implements CommandLineRunner {
         // accountJohn
         Account accountJohn1 = accountService.create(new Account(generateRandomAccount(""),
                 generateRandomAccount("US"),
-                "47363873.10",
+                new BigDecimal("47363873.10"),
                 userJohn,
                 savingsAccountType,
                 usdCurrency));
         Account accountJohn2 = accountService.create(new Account(generateRandomAccount(""),
                 generateRandomAccount("AE"),
-                "283368.00",
+                new BigDecimal("283368.00"),
                 userJohn,
                 fixedDepositAccountType,
                 aedCurrency));
         Account accountJohn3 = accountService.create(new Account(generateRandomAccount(""),
                 generateRandomAccount("NG"),
-                "987333.91",
+                new BigDecimal("987333.91"),
                 userJohn,
                 currentAccountType,
                 ngnCurrency));
@@ -107,22 +113,79 @@ public class DataLoader implements CommandLineRunner {
         // accountKumar
         Account accountKumar1 = accountService.create(new Account(generateRandomAccount(""),
                 generateRandomAccount("EG"),
-                "55377.10",
+                new BigDecimal("55377.10"),
                 userKumar,
                 savingsAccountType,
                 egpCurrency));
         Account accountKumar2 = accountService.create(new Account(generateRandomAccount(""),
                 generateRandomAccount("AE"),
-                "100.00",
+                new BigDecimal("100.00"),
                 userKumar,
                 fixedDepositAccountType,
                 aedCurrency));
         Account accountKumar3 = accountService.create(new Account(generateRandomAccount(""),
                 generateRandomAccount("NG"),
-                "28672.07",
+                new BigDecimal("28672.07"),
                 userKumar,
                 currentAccountType,
                 ngnCurrency));
+
+
+        // Create Account Statements
+        // accountStatementMohamed1
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy", Locale.ENGLISH);
+
+        AccountStatement accountStatementMohamed1 = accountStatementService.create(new AccountStatement("purchase of item abc",
+                new BigDecimal("200.00"),
+                formatter.parse("1-jan-2022"),
+                accountMohamed1));
+
+        AccountStatement accountStatementMohamed2 = accountStatementService.create(new AccountStatement("payment of electricity bill",
+                new BigDecimal("2500.00"),
+                formatter.parse("25-dec-2021"),
+                accountMohamed1));
+
+        AccountStatement accountStatementMohamed3 = accountStatementService.create(new AccountStatement("school fees payment",
+                new BigDecimal("763.37"),
+                formatter.parse("17-nov-2021"),
+                accountMohamed1));
+
+        AccountStatement accountStatementMohamed4 = accountStatementService.create(new AccountStatement("hospital bill payment",
+                new BigDecimal("58000.37"),
+                formatter.parse("1-jun-2021"),
+                accountMohamed1));
+
+
+        AccountStatement accountStatementMohamed5 = accountStatementService.create(new AccountStatement("grocery shopping",
+                new BigDecimal("1010.00"),
+                formatter.parse("4-jan-2022"),
+                accountMohamed2));
+
+        AccountStatement accountStatementMohamed6 = accountStatementService.create(new AccountStatement("wedding anniversary party",
+                new BigDecimal("45000.00"),
+                formatter.parse("8-dec-2021"),
+                accountMohamed2));
+
+        AccountStatement accountStatementMohamed7 = accountStatementService.create(new AccountStatement("club on tuesday",
+                new BigDecimal("999.37"),
+                formatter.parse("17-feb-2021"),
+                accountMohamed2));
+
+        AccountStatement accountStatementMohamed8 = accountStatementService.create(new AccountStatement("cable tv bill",
+                new BigDecimal("892.00"),
+                formatter.parse("4-jun-2021"),
+                accountMohamed3));
+
+        AccountStatement accountStatementMohamed9 = accountStatementService.create(new AccountStatement("wedding anniversary party",
+                new BigDecimal("45000.00"),
+                formatter.parse("8-dec-2021"),
+                accountMohamed3));
+
+        AccountStatement accountStatementMohamed10 = accountStatementService.create(new AccountStatement("club on tuesday",
+                new BigDecimal("999.37"),
+                formatter.parse("17-nov-2021"),
+                accountMohamed3));
+
 
         logger.info("Data loaded successfully");
 

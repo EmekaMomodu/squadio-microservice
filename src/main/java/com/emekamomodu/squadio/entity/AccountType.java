@@ -20,7 +20,7 @@ public class AccountType {
     private Long accountTypeId;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "account_type_name", unique=true)
+    @Column(name = "account_type_name", unique = true)
     private EAccountType accountTypeName;
 
     @OneToMany(mappedBy = "accountType", cascade = CascadeType.ALL, orphanRemoval = true)

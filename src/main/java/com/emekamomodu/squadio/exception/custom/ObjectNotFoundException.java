@@ -5,7 +5,7 @@ package com.emekamomodu.squadio.exception.custom;
  * @version 1.0
  * @date 12/31/21 12:05 AM
  */
-public class ObjectNotFoundException extends RuntimeException{
+public class ObjectNotFoundException extends RuntimeException {
 
     public ObjectNotFoundException(String message) {
         super(message);

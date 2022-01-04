@@ -15,12 +15,12 @@ import java.util.Set;
 public class Role {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "role_id")
     private Long roleId;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "role_name")
+    @Column(name = "role_name", unique=true)
     private ERole roleName;
 
     @ManyToMany(mappedBy = "userRoles")

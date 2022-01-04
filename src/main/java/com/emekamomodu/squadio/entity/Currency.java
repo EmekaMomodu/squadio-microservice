@@ -17,14 +17,22 @@ public class Currency {
     @Column(name = "currency_id")
     private Long currencyId;
 
-    @Column(name = "currency_code")
+    @Column(name = "currency_code", unique=true)
     private String currencyCode;
 
-    @Column(name = "currency_name")
+    @Column(name = "currency_name", unique=true)
     private String currencyName;
 
     @OneToMany(mappedBy = "currency", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Account> accounts;
+
+    public Currency() {
+    }
+
+    public Currency(String currencyCode, String currencyName) {
+        this.currencyCode = currencyCode;
+        this.currencyName = currencyName;
+    }
 
     public Long getCurrencyId() {
         return currencyId;
@@ -60,7 +68,7 @@ public class Currency {
 
     @Override
     public String toString() {
-        return "Currency{" +
+        return "CurrencyRepository{" +
                 "currencyId=" + currencyId +
                 ", currencyCode='" + currencyCode + '\'' +
                 ", currencyName='" + currencyName + '\'' +

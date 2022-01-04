@@ -1,5 +1,7 @@
 package com.emekamomodu.squadio.entity;
 
+import com.emekamomodu.squadio.model.EAccountType;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -17,11 +19,19 @@ public class AccountType {
     @Column(name = "account_type_id")
     private Long accountTypeId;
 
-    @Column(name = "account_type_name")
-    private String accountTypeName;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "account_type_name", unique=true)
+    private EAccountType accountTypeName;
 
     @OneToMany(mappedBy = "accountType", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Account> accounts;
+
+    public AccountType() {
+    }
+
+    public AccountType(EAccountType accountTypeName) {
+        this.accountTypeName = accountTypeName;
+    }
 
     public Long getAccountTypeId() {
         return accountTypeId;
@@ -31,11 +41,11 @@ public class AccountType {
         this.accountTypeId = accountTypeId;
     }
 
-    public String getAccountTypeName() {
+    public EAccountType getAccountTypeName() {
         return accountTypeName;
     }
 
-    public void setAccountTypeName(String accountTypeName) {
+    public void setAccountTypeName(EAccountType accountTypeName) {
         this.accountTypeName = accountTypeName;
     }
 
@@ -49,7 +59,7 @@ public class AccountType {
 
     @Override
     public String toString() {
-        return "AccountType{" +
+        return "AccountTypeRepository{" +
                 "accountTypeId=" + accountTypeId +
                 ", accountTypeName='" + accountTypeName + '\'' +
                 ", accounts=" + accounts +

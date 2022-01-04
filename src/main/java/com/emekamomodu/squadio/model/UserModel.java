@@ -1,5 +1,7 @@
 package com.emekamomodu.squadio.model;
 
+import com.emekamomodu.squadio.entity.User;
+
 /**
  * @author CMOMODU
  * @version 1.0
@@ -17,6 +19,11 @@ public class UserModel {
     public UserModel(Long id, String name) {
         this.id = id;
         this.name = name;
+    }
+
+    public UserModel(User user) {
+        this.id = user.getUserId();
+        this.name = user.getUsername();
     }
 
     public Long getId() {

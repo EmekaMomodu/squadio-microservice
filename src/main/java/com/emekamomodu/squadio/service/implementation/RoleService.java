@@ -2,9 +2,9 @@ package com.emekamomodu.squadio.service.implementation;
 
 import com.emekamomodu.squadio.entity.Role;
 import com.emekamomodu.squadio.exception.custom.ObjectNotFoundException;
+import com.emekamomodu.squadio.model.ERole;
 import com.emekamomodu.squadio.repository.RoleRepository;
 import com.emekamomodu.squadio.service.IRoleService;
-import com.emekamomodu.squadio.model.ERole;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +36,7 @@ public class RoleService implements IRoleService {
         } catch (Exception exception) {
             logger.error("Error in creating role: {}", exception.getMessage());
         }
+        logger.info("Role created successfully: {}", createdRole);
         return createdRole;
     }
 

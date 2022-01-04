@@ -17,10 +17,10 @@ public class Account {
     @Column(name = "account_id")
     private Long accountId;
 
-    @Column(name = "account_number")
+    @Column(name = "account_number", unique=true)
     private String accountNumber;
 
-    @Column(name = "iban")
+    @Column(name = "iban", unique=true)
     private String iban;
 
     @Column(name = "balance")
@@ -40,6 +40,19 @@ public class Account {
 
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<AccountStatement> accountStatements;
+
+    public Account() {
+    }
+
+    public Account(String accountNumber, String iban, String balance, User user,
+                   AccountType accountType, Currency currency) {
+        this.accountNumber = accountNumber;
+        this.iban = iban;
+        this.balance = balance;
+        this.user = user;
+        this.accountType = accountType;
+        this.currency = currency;
+    }
 
     public Long getAccountId() {
         return accountId;

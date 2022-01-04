@@ -15,8 +15,8 @@ import java.util.Set;
 @Entity
 @Table(name = "user",
         uniqueConstraints = {
-        @UniqueConstraint(columnNames = "username")
-})
+                @UniqueConstraint(columnNames = "username")
+        })
 public class User {
 
     @Id
@@ -43,6 +43,9 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Account> accounts;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<TokenBlacklist> tokenBlacklists;
+
     public User() {
     }
 
@@ -55,6 +58,26 @@ public class User {
         this.username = username;
         this.password = password;
         this.userRoles = userRoles;
+    }
+
+    public User(Long userId, String username, String password, String loginFlag, Set<Role> userRoles, Set<Account> accounts, Set<TokenBlacklist> tokenBlacklists) {
+        this.userId = userId;
+        this.username = username;
+        this.password = password;
+        this.loginFlag = loginFlag;
+        this.userRoles = userRoles;
+        this.accounts = accounts;
+        this.tokenBlacklists = tokenBlacklists;
+    }
+
+    public User(User user) {
+        this.userId = user.userId;
+        this.username = user.username;
+        this.password = user.password;
+        this.loginFlag = user.loginFlag;
+        this.userRoles = user.userRoles;
+        this.accounts = user.accounts;
+        this.tokenBlacklists = user.tokenBlacklists;
     }
 
     public Long getUserId() {

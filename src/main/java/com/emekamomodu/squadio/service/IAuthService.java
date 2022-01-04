@@ -19,4 +19,11 @@ public interface IAuthService {
      * @return Response response object
      */
     Response login(AuthRequest authRequest) throws InvalidRequestObjectException, AuthenticationException, ObjectAlreadyExistsException;
+
+    /**
+     * log user out
+     * @return Response response object
+     */
+    Response logout();
+
 }

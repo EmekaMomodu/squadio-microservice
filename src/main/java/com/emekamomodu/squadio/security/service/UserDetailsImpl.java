@@ -26,10 +26,8 @@ public class UserDetailsImpl implements UserDetails {
 
     @JsonIgnore
     private final String password;
-
-    private String loginFlag;
-
     private final Collection<? extends GrantedAuthority> authorities;
+    private String loginFlag;
 
     public UserDetailsImpl(Long id, String username, String password,
                            Collection<? extends GrantedAuthority> authorities, String loginFlag) {
@@ -108,5 +106,15 @@ public class UserDetailsImpl implements UserDetails {
             return false;
         UserDetailsImpl user = (UserDetailsImpl) o;
         return Objects.equals(id, user.id);
+    }
+
+    @Override
+    public String toString() {
+        return "UserDetailsImpl{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", authorities=" + authorities +
+                ", loginFlag='" + loginFlag + '\'' +
+                '}';
     }
 }

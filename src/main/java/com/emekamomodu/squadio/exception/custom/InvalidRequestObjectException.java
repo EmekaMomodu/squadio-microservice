@@ -7,7 +7,7 @@ package com.emekamomodu.squadio.exception.custom;
  */
 public class InvalidRequestObjectException extends RuntimeException {
 
-    public InvalidRequestObjectException(String message){
+    public InvalidRequestObjectException(String message) {
         super(message);
     }
 

@@ -15,8 +15,6 @@ import org.springframework.stereotype.Component;
 import java.util.Date;
 import java.util.List;
 
-import static com.emekamomodu.squadio.utility.Utility.capitalize;
-
 /**
  * @author CMOMODU
  * @version 1.0
@@ -59,7 +57,7 @@ public class JwtUtils {
         try {
             Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(authToken);
             // check token is not blacklisted if url is not logout
-            if (!requestUri.contains("/logout")){
+            if (!requestUri.contains("/logout")) {
                 String username = getUserNameFromJwtToken(authToken);
                 boolean tokenBlacklisted = checkTokenBlacklistedForUser(authToken, username);
                 return !tokenBlacklisted;
@@ -85,10 +83,10 @@ public class JwtUtils {
         return false;
     }
 
-    private boolean checkTokenBlacklistedForUser (String token, String username){
-        List<TokenBlacklist> tokenBlacklists  = tokenBlacklistRepository.findAllByUser(username);
-        for(TokenBlacklist tokenBlacklist: tokenBlacklists){
-            if (tokenBlacklist.getToken().equals(token)){
+    private boolean checkTokenBlacklistedForUser(String token, String username) {
+        List<TokenBlacklist> tokenBlacklists = tokenBlacklistRepository.findAllByUser(username);
+        for (TokenBlacklist tokenBlacklist : tokenBlacklists) {
+            if (tokenBlacklist.getToken().equals(token)) {
                 return true;
             }
         }

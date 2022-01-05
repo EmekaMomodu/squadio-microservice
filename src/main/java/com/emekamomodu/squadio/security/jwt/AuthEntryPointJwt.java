@@ -35,7 +35,7 @@ public class AuthEntryPointJwt implements AuthenticationEntryPoint {
                          AuthenticationException authException) throws IOException, ServletException {
 
         logger.error("Unauthorized error: {}", authException.getMessage());
-        Response customResponse = new Response(false, authException.getMessage() + ", Invalid/Expired Token, Kindly login first");
+        Response customResponse = new Response(false, authException.getMessage() + ". Invalid/Expired Token, Kindly login first");
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);
         response.setStatus(response.SC_UNAUTHORIZED);
         mapper.writeValue(response.getWriter(), customResponse);

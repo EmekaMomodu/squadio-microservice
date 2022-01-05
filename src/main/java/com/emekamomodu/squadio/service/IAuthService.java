@@ -25,6 +25,7 @@ public interface IAuthService {
 
     /**
      * log user out
+     *
      * @param request servlet request
      * @return Response response object
      */

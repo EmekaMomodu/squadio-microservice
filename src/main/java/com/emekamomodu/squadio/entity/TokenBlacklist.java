@@ -10,7 +10,7 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "token_blacklist",
-        indexes = {@Index(name = "token_blacklist_index_user",  columnList="user_id")})
+        indexes = {@Index(name = "token_blacklist_index_user", columnList = "user_id")})
 public class TokenBlacklist {
 
     @Id

@@ -4,6 +4,7 @@ import com.emekamomodu.squadio.entity.TokenBlacklist;
 import com.emekamomodu.squadio.entity.User;
 import com.emekamomodu.squadio.exception.custom.InvalidRequestObjectException;
 import com.emekamomodu.squadio.exception.custom.ObjectAlreadyExistsException;
+import com.emekamomodu.squadio.model.AuthModel;
 import com.emekamomodu.squadio.model.request.AuthRequest;
 import com.emekamomodu.squadio.model.response.Response;
 import com.emekamomodu.squadio.repository.TokenBlacklistRepository;
@@ -79,7 +80,8 @@ public class AuthService implements IAuthService {
         if (token != null) {
             response.setSuccess(true);
             response.setMessage("User Login Successful");
-            response.setData(token);
+            AuthModel authModel = new AuthModel(userDetails.getId(), token);
+            response.setData(authModel);
             // update login flag
             userRepository.updateLoginFlagWithId(userDetails.getId(), "Y");
         }

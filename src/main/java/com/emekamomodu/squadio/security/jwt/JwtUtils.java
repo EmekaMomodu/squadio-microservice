@@ -57,7 +57,7 @@ public class JwtUtils {
 
     public boolean validateJwtToken(String authToken, String requestUri) {
         try {
-            Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(authToken);
+            Jws<Claims> claims = Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(authToken);
             // check token is not blacklisted if url is not logout
             if (!requestUri.contains("/logout")){
                 String username = getUserNameFromJwtToken(authToken);
@@ -70,6 +70,11 @@ public class JwtUtils {
         } catch (MalformedJwtException malformedJwtException) {
             logger.error("Invalid JWT token: {}", malformedJwtException.getMessage());
         } catch (ExpiredJwtException expiredJwtException) {
+            // Auto logout user
+            // update login flag
+            String username;
+            userRepository.updateLoginFlagWithName("", "N"); // TODO how to get username/id
+            logger.info("Auto logged out user");
             logger.error("JWT token is expired: {}", expiredJwtException.getMessage());
             logger.info("Auto logging out user");
             // Auto logout user

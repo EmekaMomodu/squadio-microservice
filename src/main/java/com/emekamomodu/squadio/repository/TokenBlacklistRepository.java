@@ -14,7 +14,7 @@ import java.util.List;
  */
 public interface TokenBlacklistRepository extends JpaRepository<TokenBlacklist, Long> {
 
-    @Query("FROM TokenBlacklist tokenBlacklist where tokenBlacklist.user.userId = :userId")
-    List<TokenBlacklist> findAllByUserOrderByDateDesc(@Param("userId") Long userId);
+    @Query("FROM TokenBlacklist tokenBlacklist where upper(tokenBlacklist.user.username) = upper(:username)")
+    List<TokenBlacklist> findAllByUser(@Param("username") String username);
 
 }

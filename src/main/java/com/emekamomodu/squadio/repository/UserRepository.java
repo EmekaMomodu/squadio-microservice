@@ -23,6 +23,11 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Transactional
     @Modifying
     @Query("update User user set user.loginFlag = :loginFlag where user.userId = :userId")
-    void updateLoginFlag(@Param(value = "userId") Long userId, @Param(value = "loginFlag") String loginFlag);
+    void updateLoginFlagWithId(@Param(value = "userId") Long userId, @Param(value = "loginFlag") String loginFlag);
+
+    @Transactional
+    @Modifying
+    @Query("update User user set user.loginFlag = :loginFlag where upper(user.username) = upper(:username)")
+    void updateLoginFlagWithName(@Param(value = "username") String username, @Param(value = "loginFlag") String loginFlag);
 
 }

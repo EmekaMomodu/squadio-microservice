@@ -9,7 +9,8 @@ import java.util.Date;
  * @date 1/3/22 10:47 AM
  */
 @Entity
-@Table(name = "token_blacklist")
+@Table(name = "token_blacklist",
+        indexes = {@Index(name = "token_blacklist_index_user",  columnList="user_id")})
 public class TokenBlacklist {
 
     @Id

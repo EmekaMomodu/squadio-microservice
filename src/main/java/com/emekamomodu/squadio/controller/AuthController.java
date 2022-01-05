@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 /**
@@ -30,7 +31,7 @@ public class AuthController {
     }
 
     @PostMapping("/logout")
-    public ResponseEntity<Response> logout() {
-        return ResponseEntity.ok(authService.logout());
+    public ResponseEntity<Response> logout(HttpServletRequest request) {
+        return ResponseEntity.ok(authService.logout(request));
     }
 }

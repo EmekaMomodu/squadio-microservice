@@ -1,9 +1,12 @@
 package com.emekamomodu.squadio.service.implementation;
 
+import com.emekamomodu.squadio.entity.TokenBlacklist;
+import com.emekamomodu.squadio.entity.User;
 import com.emekamomodu.squadio.exception.custom.InvalidRequestObjectException;
 import com.emekamomodu.squadio.exception.custom.ObjectAlreadyExistsException;
 import com.emekamomodu.squadio.model.request.AuthRequest;
 import com.emekamomodu.squadio.model.response.Response;
+import com.emekamomodu.squadio.repository.TokenBlacklistRepository;
 import com.emekamomodu.squadio.repository.UserRepository;
 import com.emekamomodu.squadio.security.jwt.JwtUtils;
 import com.emekamomodu.squadio.security.service.UserDetailsImpl;
@@ -17,6 +20,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+
+import javax.servlet.http.HttpServletRequest;
 
 import static com.emekamomodu.squadio.utility.Utility.capitalize;
 
@@ -25,6 +31,7 @@ import static com.emekamomodu.squadio.utility.Utility.capitalize;
  * @version 1.0
  * @date 12/31/21 7:52 PM
  */
+@SuppressWarnings("Duplicates")
 @Service
 public class AuthService implements IAuthService {
 
@@ -38,6 +45,9 @@ public class AuthService implements IAuthService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private TokenBlacklistRepository tokenBlacklistRepository;
 
     @Override
     public Response login(AuthRequest authRequest) throws InvalidRequestObjectException, AuthenticationException, ObjectAlreadyExistsException {
@@ -71,17 +81,33 @@ public class AuthService implements IAuthService {
             response.setMessage("User Login Successful");
             response.setData(token);
             // update login flag
-            userRepository.updateLoginFlag(userDetails.getId(), "Y");
+            userRepository.updateLoginFlagWithId(userDetails.getId(), "Y");
         }
 
         return response;
     }
 
     @Override
-    public Response logout() {
+    public Response logout(HttpServletRequest request) {
 
         logger.info("logout user initiated");
-        return null;
+
+        // Get user details
+        UserDetailsImpl userDetails = (UserDetailsImpl) SecurityContextHolder.getContext()
+                .getAuthentication()
+                .getPrincipal();
+
+        // update login flag
+        userRepository.updateLoginFlagWithId(userDetails.getId(), "N");
+
+        // invalidate token by adding to blacklist
+        String headerAuth = request.getHeader("Authorization");
+        String token = headerAuth.substring(7);
+        User user = new User(userDetails.getId());
+        TokenBlacklist tokenBlacklist = new TokenBlacklist(token, user);
+        tokenBlacklistRepository.save(tokenBlacklist);
+
+        return new Response(true, "User Logout Successful");
     }
 
     private void validateAuthRequest(AuthRequest authRequest) throws InvalidRequestObjectException {

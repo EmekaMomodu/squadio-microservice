@@ -6,6 +6,8 @@ import com.emekamomodu.squadio.model.request.AuthRequest;
 import com.emekamomodu.squadio.model.response.Response;
 import org.springframework.security.core.AuthenticationException;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * @author CMOMODU
  * @version 1.0
@@ -23,9 +25,9 @@ public interface IAuthService {
 
     /**
      * log user out
-     *
+     * @param request servlet request
      * @return Response response object
      */
-    Response logout();
+    Response logout(HttpServletRequest request);
 
 }

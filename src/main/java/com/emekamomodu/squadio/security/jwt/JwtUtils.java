@@ -74,7 +74,6 @@ public class JwtUtils {
             // Auto logout user
             // update login flag
             String username = expiredJwtException.getClaims().getSubject();
-            logger.debug("username +++++ " + username);
             userRepository.updateLoginFlagWithName(username, "N");
             logger.info("Auto logged out user");
         } catch (UnsupportedJwtException unsupportedJwtException) {

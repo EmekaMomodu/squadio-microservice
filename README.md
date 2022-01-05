@@ -13,5 +13,7 @@ To spin up a container from the created image, run `docker run -p 8080:8080 -d s
 ## API DOC
 View api documentation at [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
 
+Or import postman docs located at [Squadio-Microservice.postman_collection.json](https://github.com/EmekaMomodu/squadio-microservice/blob/main/docs/Squadio-Microservice.postman_collection.json)
+
 ## Database Console
 View H2 in-memory database at [http://localhost:8080/h2-console](http://localhost:8080/h2-console) login details specified at [application.properties](https://github.com/EmekaMomodu/squadio-microservice/blob/main/src/main/resources/application.properties)

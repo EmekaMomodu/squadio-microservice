@@ -18,14 +18,14 @@ public class TokenBlacklist {
     @Column(name = "token_blacklist_id")
     private Long tokenBlacklistId;
 
-    @Column(name = "token")
+    @Column(name = "token", nullable = false)
     private String token;
 
-    @Column(name = "date")
-    private Date date = new Date();
+    @Column(name = "create_date", nullable = false)
+    private Date createDate = new Date();
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
     public TokenBlacklist() {
@@ -52,12 +52,12 @@ public class TokenBlacklist {
         this.token = token;
     }
 
-    public Date getDate() {
-        return date;
+    public Date getCreateDate() {
+        return createDate;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setCreateDate(Date date) {
+        this.createDate = date;
     }
 
     public User getUser() {

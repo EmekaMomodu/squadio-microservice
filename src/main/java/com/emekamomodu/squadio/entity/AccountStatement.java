@@ -21,23 +21,23 @@ public class AccountStatement {
     @Column(name = "description")
     private String description;
 
-    @Column(name = "amount", scale = 2)
+    @Column(name = "amount", scale = 2, nullable = false)
     private BigDecimal amount;
 
-    @Column(name = "date")
-    private Date date;
+    @Column(name = "create_date", nullable = false)
+    private Date createDate;
 
     @ManyToOne
-    @JoinColumn(name = "account_id")
+    @JoinColumn(name = "account_id", nullable = false)
     private Account account;
 
     public AccountStatement() {
     }
 
-    public AccountStatement(String description, BigDecimal amount, Date date, Account account) {
+    public AccountStatement(String description, BigDecimal amount, Date createDate, Account account) {
         this.description = description;
         this.amount = amount;
-        this.date = date;
+        this.createDate = createDate;
         this.account = account;
     }
 
@@ -65,12 +65,12 @@ public class AccountStatement {
         this.amount = amount;
     }
 
-    public Date getDate() {
-        return date;
+    public Date getCreateDate() {
+        return createDate;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setCreateDate(Date date) {
+        this.createDate = date;
     }
 
     public Account getAccount() {
@@ -87,7 +87,7 @@ public class AccountStatement {
                 "accountStatementId=" + accountStatementId +
                 ", description='" + description + '\'' +
                 ", amount='" + amount + '\'' +
-                ", date=" + date +
+                ", date=" + createDate +
                 ", account=" + account +
                 '}';
     }

@@ -70,7 +70,7 @@ public class AuthService implements IAuthService {
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
 
         // Check if user is already logged in and if true throw exception
-        if (userDetails.getLoginFlag().equalsIgnoreCase("Y")) {
+        if (Character.toUpperCase(userDetails.getLoginFlag()) == 'Y') {
             throw new ObjectAlreadyExistsException("User already logged in, Kindly logout first before logging in");
         }
 
@@ -82,7 +82,7 @@ public class AuthService implements IAuthService {
             AuthModel authModel = new AuthModel(userDetails.getId(), token);
             response.setData(authModel);
             // update login flag
-            userRepository.updateLoginFlagWithId(userDetails.getId(), "Y");
+            userRepository.updateLoginFlagWithId(userDetails.getId(), 'Y');
         }
 
         return response;
@@ -98,8 +98,13 @@ public class AuthService implements IAuthService {
                 .getAuthentication()
                 .getPrincipal();
 
+        // Check if user is already logged out and if true throw exception
+        if (Character.toUpperCase(userDetails.getLoginFlag()) == 'N') {
+            throw new ObjectAlreadyExistsException("User already logged Out, Kindly login first before logging out");
+        }
+
         // update login flag
-        userRepository.updateLoginFlagWithId(userDetails.getId(), "N");
+        userRepository.updateLoginFlagWithId(userDetails.getId(), 'N');
 
         // invalidate token by adding to blacklist
         String headerAuth = request.getHeader("Authorization");

@@ -27,10 +27,10 @@ public class UserDetailsImpl implements UserDetails {
     @JsonIgnore
     private final String password;
     private final Collection<? extends GrantedAuthority> authorities;
-    private String loginFlag;
+    private Character loginFlag;
 
     public UserDetailsImpl(Long id, String username, String password,
-                           Collection<? extends GrantedAuthority> authorities, String loginFlag) {
+                           Collection<? extends GrantedAuthority> authorities, Character loginFlag) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -90,11 +90,11 @@ public class UserDetailsImpl implements UserDetails {
         return true;
     }
 
-    public String getLoginFlag() {
+    public Character getLoginFlag() {
         return loginFlag;
     }
 
-    public void setLoginFlag(String loginFlag) {
+    public void setLoginFlag(Character loginFlag) {
         this.loginFlag = loginFlag;
     }
 

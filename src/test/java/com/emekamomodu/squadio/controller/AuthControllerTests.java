@@ -62,4 +62,5 @@ public class AuthControllerTests  extends AbstractTest  {
         assertNotEquals(loginResponse.getData(), null);
 
     }
+
 }

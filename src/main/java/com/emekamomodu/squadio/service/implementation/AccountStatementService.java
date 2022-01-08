@@ -125,7 +125,7 @@ public class AccountStatementService implements IAccountStatementService {
                     hashAccountNumber(accountStatement.getAccount().getAccountNumber()),
                     accountStatement.getDescription(),
                     accountStatement.getAmount(),
-                    accountStatement.getDate());
+                    accountStatement.getCreateDate());
 
             accountStatementModels.add(accountStatementModel);
         }

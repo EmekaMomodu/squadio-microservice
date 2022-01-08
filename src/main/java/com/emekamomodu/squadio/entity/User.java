@@ -24,16 +24,16 @@ public class User {
     @Column(name = "user_id")
     private Long userId;
 
-    @Column(name = "username")
+    @Column(name = "username", nullable = false)
     private String username;
 
-    @Column(name = "password")
+    @Column(name = "password", nullable = false)
     @JsonIgnore
     private String password;
 
-    @Column(name = "login_flag")
+    @Column(name = "login_flag", length = 1, nullable = false)
     @ColumnDefault("'N'")
-    private String loginFlag = "N";
+    private Character loginFlag = 'N';
 
     @ManyToMany
     @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "user_id"),
@@ -64,7 +64,7 @@ public class User {
         this.userRoles = userRoles;
     }
 
-    public User(Long userId, String username, String password, String loginFlag, Set<Role> userRoles, Set<Account> accounts, Set<TokenBlacklist> tokenBlacklists) {
+    public User(Long userId, String username, String password, Character loginFlag, Set<Role> userRoles, Set<Account> accounts, Set<TokenBlacklist> tokenBlacklists) {
         this.userId = userId;
         this.username = username;
         this.password = password;
@@ -108,11 +108,11 @@ public class User {
         this.password = password;
     }
 
-    public String getLoginFlag() {
+    public Character getLoginFlag() {
         return loginFlag;
     }
 
-    public void setLoginFlag(String loginFlag) {
+    public void setLoginFlag(Character loginFlag) {
         this.loginFlag = loginFlag;
     }
 

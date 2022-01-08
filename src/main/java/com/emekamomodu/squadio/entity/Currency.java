@@ -17,7 +17,7 @@ public class Currency {
     @Column(name = "currency_id")
     private Long currencyId;
 
-    @Column(name = "currency_code", unique = true)
+    @Column(name = "currency_code", unique = true, length = 3)
     private String currencyCode;
 
     @Column(name = "currency_name", unique = true)

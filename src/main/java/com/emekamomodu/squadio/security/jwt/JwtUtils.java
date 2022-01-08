@@ -1,6 +1,5 @@
 package com.emekamomodu.squadio.security.jwt;
 
-import com.emekamomodu.squadio.entity.TokenBlacklist;
 import com.emekamomodu.squadio.repository.TokenBlacklistRepository;
 import com.emekamomodu.squadio.repository.UserRepository;
 import com.emekamomodu.squadio.security.service.UserDetailsImpl;
@@ -13,7 +12,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
-import java.util.List;
+import java.util.Set;
 
 /**
  * @author CMOMODU
@@ -58,8 +57,7 @@ public class JwtUtils {
             Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(authToken);
             // check token is not blacklisted if url is not logout
             if (!requestUri.contains("/logout")) {
-                String username = getUserNameFromJwtToken(authToken);
-                boolean tokenBlacklisted = checkTokenBlacklistedForUser(authToken, username);
+                boolean tokenBlacklisted = checkTokenBlacklistedForUser(authToken, getUserNameFromJwtToken(authToken));
                 return !tokenBlacklisted;
             }
             return true;
@@ -72,7 +70,7 @@ public class JwtUtils {
             // Auto logout user
             // update login flag
             String username = expiredJwtException.getClaims().getSubject();
-            userRepository.updateLoginFlagWithName(username, "N");
+            userRepository.updateLoginFlagWithName(username, 'N');
             logger.info("Auto logged out user");
         } catch (UnsupportedJwtException unsupportedJwtException) {
             logger.error("JWT token is unsupported: {}", unsupportedJwtException.getMessage());
@@ -84,13 +82,8 @@ public class JwtUtils {
     }
 
     private boolean checkTokenBlacklistedForUser(String token, String username) {
-        List<TokenBlacklist> tokenBlacklists = tokenBlacklistRepository.findAllByUser(username);
-        for (TokenBlacklist tokenBlacklist : tokenBlacklists) {
-            if (tokenBlacklist.getToken().equals(token)) {
-                return true;
-            }
-        }
-        return false;
+        Set<String> blacklistedTokensForUser = tokenBlacklistRepository.getBlacklistedTokensForUser(username);
+        return blacklistedTokensForUser.contains(token);
     }
 
 }

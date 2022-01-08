@@ -2,7 +2,7 @@
 This is a dockerized microservice with APIs to handle requests to view users, accounts and statements by performing a 
 simple search on dates and amount ranges
 
-# Entity Relationship
+## Entity Relationship
 The Entity Relationship Diagram for the system
 ![Entity Relationship Diagram](https://github.com/EmekaMomodu/squadio-microservice/blob/main/docs/Entity-Relationship-Diagram.png "Entity Relationship Diagram.")
 

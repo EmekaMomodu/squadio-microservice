@@ -31,7 +31,7 @@ public class AuthControllerTests  extends AbstractTest  {
     }
 
     @Test
-    @DisplayName("Admin user login successful")
+    @DisplayName("User login successful")
     public void loginTestSuccess() throws Exception {
 
         String uri = "/auth/login";
